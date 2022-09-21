@@ -13,22 +13,26 @@ module systolic_array
    output signed [BITS_C-1:0] Cout [DIM-1:0]
 );
 
-logic signed [15:0] Aout [7:0];
-logic signed [15:0] Bout [7:0];
-logic signed [15:0] Co [7:0];
-
-// tpumac t1 (.Ain(A), .Bin(B), .Cin(Cin[0]), .Aout(Aout[0]), .Bout(Bout[0]), .Cout(Co[0]), .clk(clk), .en(en), .rst_n(rst_n), .WrEn(WrEn==0));
-genvar i, j;
+logic signed [BITS_AB-1:0] Aout [DIM:0][DIM:0];
+logic signed [BITS_AB-1:0] Bout [DIM:0][DIM:0];
+logic signed [BITS_C-1:0] Co [DIM-1:0][DIM-1:0];
+genvar row, col;
 generate
-  for (i=0; i < 8; ++i) begin
-   for (j=0; j < 8; ++j) begin
-      tpumac ti(.Ain(Aout[i]), .Bin(Bout[j]), .Cin(Cin[Crow]), .Aout(Aout[i]), .Bout(Bout[j]), .Cout(Co[i]), .clk(clk), .en(en), .rst_n(rst_n), .WrEn(WrEn==i));
-   end // for(i
-  end
+   for (row = 0; row < DIM; ++row) begin
+      assign Aout[row][0] = A[row];
+   end
+   for (col = 0; col < DIM; ++col) begin
+      assign Bout[0][col] = B[col];
+   end
+   for (row=0; row < DIM; ++row) begin
+      for (col=0; col < DIM; ++col) begin
+         tpumac ti(.Ain(Aout[row][col]), .Bin(Bout[row][col]), .Cin(Cin[Crow]), .Aout(Aout[row][col+1]), .Bout(Bout[row+1][col]), .Cout(Co[row][col]), .clk(clk), .en(en), .rst_n(rst_n), .WrEn(WrEn && Crow==row));
+      end
+   end
 endgenerate
 
 // Assign Cout based on Crow selection
-assign Cout = Co;
+assign Cout = Co[Crow];
 
 
 endmodule
