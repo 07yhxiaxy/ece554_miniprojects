@@ -1,0 +1,187 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 d//Mac/Home/Documents/Fall 2022/ECE 554/Minilab 1
+<<<<<<< HEAD
+!s108 1663279806.000000
+Z1 !s107 C:/Users/07yhx/ece554/ECE554_Minilab2/dff.sv|
+Z2 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/07yhx/ece554/ECE554_Minilab2/dff.sv|
+!i113 1
+Z3 o-work work -sv
+Z4 =======
+!s108 1663280127.000000
+!s107 //Mac/Home/Documents/Fall 2022/ECE 554/Minilab 2/ECE554_Minilab2/dff.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|//Mac/Home/Documents/Fall 2022/ECE 554/Minilab 2/ECE554_Minilab2/dff.sv|
+!i113 0
+o-work work -sv -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+tCvgOpt 0
+R0
+<<<<<<< HEAD
+Z5 DXx6 sv_std 3 std 0 22 WmjPaeP=7F5?QFXzJ>D[Q2
+!s110 1663279806
+R4
+DXx6 sv_std 3 std 0 22 AD7iAPLo6nTIKk<N0eo=D3
+!s110 1663280127
+R0
+>>>>>>> 2c9a8f26718f14085c4ab5370d68d5d539525719
+R0
+>>>>>>> 2c9a8f26718f14085c4ab5370d68d5d539525719
+!i10b 1
+Z6 !s100 cc58AnbD?3ceVbY8^?Knl2
+Z7 IP1JUUF^7Le7D=S[jHg@3;1
+Z8 VDg1SIo80bB@j0V0VzS_@n1
+Z9 !s105 dff_sv_unit
+S1
+Z10 dC:/Users/07yhx/ece554/ECE554_Minilab2
+Z11 w1663279518
+Z12 8C:/Users/07yhx/ece554/ECE554_Minilab2/dff.sv
+Z13 FC:/Users/07yhx/ece554/ECE554_Minilab2/dff.sv
+L0 4
+Z14 OV;L;10.4d;61
+r1
+!s85 0
+31
+vdff
+R5
+Z15 !s110 1663727115
+!i10b 1
+R6
+R7
+R8
+R9
+S1
+R10
+R11
+R12
+R13
+L0 4
+R14
+r1
+!s85 0
+31
+Z16 !s108 1663727115.000000
+R1
+R2
+!i113 1
+R3
+vdff_en
+R5
+R15
+!i10b 1
+!s100 X1izYe<]icaWMf?9l;QNM3
+ISag]Bmf?ejCbV;RP6F6KB0
+R8
+!s105 dff_en_sv_unit
+S1
+R10
+R11
+8C:/Users/07yhx/ece554/ECE554_Minilab2/dff_en.sv
+FC:/Users/07yhx/ece554/ECE554_Minilab2/dff_en.sv
+L0 4
+R14
+r1
+!s85 0
+31
+R16
+!s107 C:/Users/07yhx/ece554/ECE554_Minilab2/dff_en.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/07yhx/ece554/ECE554_Minilab2/dff_en.sv|
+!i113 1
+R3
+vregister
+R5
+!s110 1663727061
+!i10b 1
+Z17 !s100 X1EHTH;fe9a>01VS;>XN>0
+Z18 ImaF5>OV[4OLmRGi_@3c521
+R8
+Z19 !s105 register_sv_unit
+S1
+R10
+Z20 w1663283745
+Z21 8C:/Users/07yhx/ece554/ECE554_Minilab2/register.sv
+Z22 FC:/Users/07yhx/ece554/ECE554_Minilab2/register.sv
+L0 4
+R14
+r1
+!s85 0
+31
+!s108 1663727061.000000
+Z23 !s107 C:/Users/07yhx/ece554/ECE554_Minilab2/register.sv|
+Z24 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/07yhx/ece554/ECE554_Minilab2/register.sv|
+!i113 1
+R3
+vregister
+R5
+R15
+!i10b 1
+R17
+R18
+R8
+R19
+S1
+R10
+R20
+R21
+R22
+L0 4
+R14
+r1
+!s85 0
+31
+R16
+R23
+R24
+!i113 1
+R3
+vtpumac
+R5
+R15
+!i10b 1
+!s100 cQET=nGP@Q584^Fzl;[V^3
+IiIJjjNWJXkOC;<C`nfL5B0
+R8
+!s105 tpumac_sv_unit
+S1
+R10
+w1663724928
+8C:/Users/07yhx/ece554/ECE554_Minilab2/tpumac.sv
+FC:/Users/07yhx/ece554/ECE554_Minilab2/tpumac.sv
+L0 2
+R14
+r1
+!s85 0
+31
+R16
+!s107 C:/Users/07yhx/ece554/ECE554_Minilab2/tpumac.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/07yhx/ece554/ECE554_Minilab2/tpumac.sv|
+!i113 1
+R3
+vtpumac_tb
+R5
+R15
+!i10b 1
+!s100 _291S4N14W1WRJ6R6FjAb2
+Ij3QAa@hl5B9GFYLNY?^Tb1
+R8
+!s105 tpumac_tb_sv_unit
+S1
+R10
+w1663727109
+8C:/Users/07yhx/ece554/ECE554_Minilab2/tpumac_tb.sv
+FC:/Users/07yhx/ece554/ECE554_Minilab2/tpumac_tb.sv
+L0 134
+R14
+r1
+!s85 0
+31
+R16
+!s107 C:/Users/07yhx/ece554/ECE554_Minilab2/tpumac_tb.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/07yhx/ece554/ECE554_Minilab2/tpumac_tb.sv|
+!i113 1
+R3
