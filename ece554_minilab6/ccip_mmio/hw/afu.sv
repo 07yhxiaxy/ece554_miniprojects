@@ -60,10 +60,25 @@ module afu
    // automatically invoke the OPAE afu_json_mgr script to extract the UUID into a constant 
    // within afu_json_info.vh.
    logic [127:0] afu_id = `AFU_ACCEL_UUID;
+   wire read_cond;
 
    // User register (memory mapped to address h0020) to test MMIO over CCI-P.
-   logic [63:0]  user_reg;
-   
+   logic [63:0] user_reg;
+   logic [63:0] in;
+
+   tpuv1 TPU(
+	.clk(clk),
+	.rst_n(!rst),
+	.r_w(rx.c0.mmioWrValid == 1),
+	.dataIn(in),
+	.addr(mmio_hdr.address),
+	.dataOut(user_reg)
+   );
+
+   assign valid_wr = ((rx.c0.mmioWrValid == 1) & (mmio_hdr.address == 16'h0020));
+
+   assign in = rx.c0.data[63:0]; 
+
    // The Rx c0 header is normally used for responses to reads from the host processor's memory.
    // For MMIO responses (i.e. when c0 mmmioRdValid or mmioWrValid is asserted), we need to 
    // cast the c0 header into a ReqMmmioHdr. Basically, these same header bits in Rx c0 are used 
@@ -71,35 +86,30 @@ module afu
    t_ccip_c0_ReqMmioHdr mmio_hdr;
    assign mmio_hdr = t_ccip_c0_ReqMmioHdr'(rx.c0.hdr);
 
-   // Instantiation of fifo
-   wire [63:0] out;
-   logic [63:0] in;
-   logic en;
-   logic fifo_rst;
-   assign fifo_rst = ~rst;
-
-   fifo buffer (.clk(clk), .rst_n(fifo_rst), .en(en), .d(in), .q(out));
-
    // =============================================================//   
    // MMIO write code
    // =============================================================// 		    
-   always_ff @(posedge clk) begin
-    if (!rst) begin
-      en <= 1'b0;
-      // Check to see if there is a valid write being received from the processor.
-      if (rx.c0.mmioWrValid == 1) begin
-		    // Check the address of the write request. If it matches the address of the
-		    // memory-mapped register (h0020), then write the received data on channel c0 
-		    // to the register.
-        case (mmio_hdr.address)
-          16'h0020: begin
-            in <= rx.c0.data[63:0];
-            en <= 1'b1;
+/*   always_ff @(posedge rst) begin 
+        if (rst)
+          begin 
+	     // Asnchronous reset for the memory-mapped register.
+	     user_reg <= '0;
           end
-        endcase
-      end
-    end
-   end
+        else
+          begin
+             // Check to see if there is a valid write being received from the processor.
+             if (rx.c0.mmioWrValid == 1)
+               begin
+		  // Check the address of the write request. If it maches the address of the
+		  // memory-mapped register (h0020), then write the received data on channel c0 
+		  // to the register.
+                //  case (mmio_hdr.address)
+                 //   16'h0020: in <= rx.c0.data[63:0];
+                //  endcase
+               end
+          end
+     end
+     */
 
    // ============================================================= 		    
    // MMIO read code
@@ -132,7 +142,7 @@ module afu
 
 		  // Check the requested read address of the read request and provide the data 
 		  // from the resource mapped to that address.
-                  case (mmio_hdr.address)
+                  casex (mmio_hdr.address)
 		    
 		    // =============================================================
 		    // IMPORTANT: Every AFU must provide the following control status registers 
@@ -141,15 +151,15 @@ module afu
 		    
                     // AFU header
                     16'h0000: tx.c2.data <= {
-					            4'b0001, // Feature type = AFU
-					            8'b0,    // reserved
-					            4'b0,    // afu minor revision = 0
-					            7'b0,    // reserved
-					            1'b1,    // end of DFH list = 1
-					            24'b0,   // next DFH offset = 0
-					            4'b0,    // afu major revision = 0
-					            12'b0    // feature ID = 0
-					          };
+					     4'b0001, // Feature type = AFU
+					     8'b0,    // reserved
+					     4'b0,    // afu minor revision = 0
+					     7'b0,    // reserved
+					     1'b1,    // end of DFH list = 1
+					     24'b0,   // next DFH offset = 0
+					     4'b0,    // afu major revision = 0
+					     12'b0    // feature ID = 0
+					     };
 
                     // AFU_ID_L
                     16'h0002: tx.c2.data <= afu_id[63:0];
@@ -166,7 +176,7 @@ module afu
 		    // =============================================================   
 		    
                     // Provide the 64-bit data from the user register mapped to h0020.
-                    16'h0020: tx.c2.data <= out;
+                    16'h03xx: tx.c2.data <= user_reg;
 
 		    // If the processor requests an address that is unused, return 0.
                     default:  tx.c2.data <= 64'h0;

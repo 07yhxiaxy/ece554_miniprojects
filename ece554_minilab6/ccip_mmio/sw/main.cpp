@@ -169,6 +169,8 @@ void unpack_from_C(uint16_t row, C_TYPE * vals, AFU& afu)
 }
 
 int main(int argc, char *argv[]) {
+	int NUM_TESTS = 4;
+	int DIM_ARR [NUM_TESTS] = {16, 32, 64, 128};
 
   try {
     // Create an AFU object to provide basic services for the FPGA. The 
@@ -209,6 +211,25 @@ int main(int argc, char *argv[]) {
 			}
 		}
 	}
+	
+	// Define max steps (moving in blocks)
+	int MAX_STEPS = DIM_ARR[0] / DIM;
+	int A_sub_row_min = 0; // select minimum row number of A subset
+	int A_sub_row_max = 0; // select maximum row number of A subset
+
+//	for(int i = 0; i < MAX_STEPS; i++){
+//		// Start A from 00 in main A matrix
+//		// Start B from row 0, on selected ofolumn	
+//
+//	
+//		for(int j = 0; j < MAX_STEPS; j++){
+//			for(int k = 0; k < MAX_STEPS; k++){
+//				A_sub_row_min = k * DIM;
+//				A_sub_row_max = ((k + 1) * DIM) - 1;
+//				
+//			}
+//		}
+//	} 
 
 	// Now try it with the AFU.
 

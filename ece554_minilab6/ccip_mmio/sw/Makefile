@@ -11,7 +11,7 @@ CPPFLAGS += -I./$(OBJDIR)
 LDFLAGS += -lopae-cxx-core
 
 # Files and folders
-SRCS = main.cpp AFU.cpp
+SRCS = main_v1.cpp AFU.cpp
 OBJS = $(addprefix $(OBJDIR)/,$(patsubst %.cpp,%.o,$(SRCS)))
 
 # Targets
